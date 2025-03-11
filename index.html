@@ -51,6 +51,20 @@
       width: 100%;
     }
 
+    #card-weather-days {
+      height: fit-content;
+      background-color: rgb(85, 150, 246);
+    }
+
+    #card-weather-days-nonactive {
+      height: fit-content;
+      color: oklch(0.556 0 0);
+    }
+
+    .card-body {
+      padding: 24px;
+    }
+
     #icons-weather {
       width: 40%;
     }
@@ -65,6 +79,28 @@
       color: black;
       font-size: 1.5rem;
       margin-bottom: 0;
+    }
+
+    .name-status-weather-days {
+      font-size: 1.125rem;
+      margin-bottom: 0;
+    }
+
+    .nswd-nonactive {
+      color: oklch(0.709 0.01 56.259);
+    }
+
+    .status-weather-days {
+      font-size: 1.25rem;
+      margin-bottom: 0;
+    }
+
+    .nswd-active {
+      color: oklch(0.923 0.003 48.717);
+    }
+
+    .swd-active {
+      color: rgb(255, 255, 255);
     }
   </style>
   <body>
@@ -105,7 +141,6 @@
         <div class="row gx-5 justify-content-between">
           <div
             class="col-4 d-flex flex-column gap-3 justify-content-center align-items-center"
-            style="width: 100%"
           >
             <p id="time">05:05 PM, Mon, Nov 23, 2020</p>
             <div class="d-flex justify-content-evenly align-items-center">
@@ -140,7 +175,224 @@
             </span>
           </div>
 
-          <div class="col-8 row"></div>
+          <!-- card -->
+          <div class="col-8 row">
+            <!-- card 1 -->
+            <div id="card-weather-days" class="card col-3 border-0 text-light">
+              <div
+                class="card-body d-flex flex-column gap-2 align-items-center"
+              >
+                <h5 class="card-title fs-5 fw-bold">Today</h5>
+                <svg
+                  id="icons-weather"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-cloud"
+                >
+                  <path
+                    d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"
+                  ></path>
+                </svg>
+
+                <div class="card-text d-flex flex-column align-items-center">
+                  <p class="name-status-weather-days nswd-active">Humidity</p>
+                  <p class="status-weather-days swd-active">30%</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- card 2 -->
+            <div id="card-weather-days-nonactive" class="card col-3 border-0">
+              <div
+                class="card-body d-flex flex-column gap-2 align-items-center"
+              >
+                <h5 class="card-title fs-5 fw-bold">Today</h5>
+                <svg
+                  id="icons-weather"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-cloud"
+                >
+                  <path
+                    d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"
+                  ></path>
+                </svg>
+
+                <div class="card-text d-flex flex-column align-items-center">
+                  <p class="name-status-weather-days nswd-nonactive">
+                    Humidity
+                  </p>
+                  <p class="status-weather-days">30%</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- card 3 -->
+            <div id="card-weather-days-nonactive" class="card col-3 border-0">
+              <div
+                class="card-body d-flex flex-column gap-2 align-items-center"
+              >
+                <h5 class="card-title fs-5 fw-bold">Today</h5>
+                <svg
+                  id="icons-weather"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-cloud"
+                >
+                  <path
+                    d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"
+                  ></path>
+                </svg>
+
+                <div class="card-text d-flex flex-column align-items-center">
+                  <p class="name-status-weather-days nswd-nonactive">
+                    Humidity
+                  </p>
+                  <p class="status-weather-days">30%</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- card 4 -->
+            <div id="card-weather-days-nonactive" class="card col-3 border-0">
+              <div
+                class="card-body d-flex flex-column gap-2 align-items-center"
+              >
+                <h5 class="card-title fs-5 fw-bold">Today</h5>
+                <svg
+                  id="icons-weather"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-cloud"
+                >
+                  <path
+                    d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"
+                  ></path>
+                </svg>
+
+                <div class="card-text d-flex flex-column align-items-center">
+                  <p class="name-status-weather-days nswd-nonactive">
+                    Humidity
+                  </p>
+                  <p class="status-weather-days">30%</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- card 5 -->
+            <div id="card-weather-days-nonactive" class="card col-3 border-0">
+              <div
+                class="card-body d-flex flex-column gap-2 align-items-center"
+              >
+                <h5 class="card-title fs-5 fw-bold">Today</h5>
+                <svg
+                  id="icons-weather"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-cloud"
+                >
+                  <path
+                    d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"
+                  ></path>
+                </svg>
+
+                <div class="card-text d-flex flex-column align-items-center">
+                  <p class="name-status-weather-days nswd-nonactive">
+                    Humidity
+                  </p>
+                  <p class="status-weather-days">30%</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- card 6 -->
+            <div id="card-weather-days-nonactive" class="card col-3 border-0">
+              <div
+                class="card-body d-flex flex-column gap-2 align-items-center"
+              >
+                <h5 class="card-title fs-5 fw-bold">Today</h5>
+                <svg
+                  id="icons-weather"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-cloud"
+                >
+                  <path
+                    d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"
+                  ></path>
+                </svg>
+
+                <div class="card-text d-flex flex-column align-items-center">
+                  <p class="name-status-weather-days nswd-nonactive">
+                    Humidity
+                  </p>
+                  <p class="status-weather-days">30%</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- card 7 -->
+            <div id="card-weather-days-nonactive" class="card col-3 border-0">
+              <div
+                class="card-body d-flex flex-column gap-2 align-items-center"
+              >
+                <h5 class="card-title fs-5 fw-bold">Today</h5>
+                <svg
+                  id="icons-weather"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-cloud"
+                >
+                  <path
+                    d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"
+                  ></path>
+                </svg>
+
+                <div class="card-text d-flex flex-column align-items-center">
+                  <p class="name-status-weather-days nswd-nonactive">
+                    Humidity
+                  </p>
+                  <p class="status-weather-days">30%</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end card -->
         </div>
       </div>
     </main>
