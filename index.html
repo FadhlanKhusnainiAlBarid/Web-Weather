@@ -27,6 +27,7 @@
     #card {
       height: fit-content;
       background-color: #fff;
+      padding: 12px;
     }
 
     #btn-map {
@@ -49,6 +50,10 @@
 
     #status-weather {
       width: 100%;
+    }
+
+    #weather-section {
+      gap: 24px;
     }
 
     #card-weather-days {
@@ -102,12 +107,28 @@
     .swd-active {
       color: rgb(255, 255, 255);
     }
+
+    @media screen and (min-width: 768px) {
+      main {
+        justify-content: center;
+      }
+      #weather-section {
+        gap: 0;
+      }
+      #card {
+        padding: 24px;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      #card {
+        padding: 48px;
+      }
+    }
   </style>
   <body>
-    <main
-      class="container d-flex flex-column gap-5 justify-content-center align-items-center"
-    >
-      <div id="card" class="p-5 rounded-3">
+    <main class="container d-flex flex-column">
+      <div id="card" class="rounded-3">
         <nav class="navbar navbar-expand mb-5">
           <div class="d-flex gap-2 fs-6 text text-nowrap align-items-center">
             Search city
@@ -118,29 +139,15 @@
               id="city"
               value="Jakarta"
             />
-            <button id="btn-map" class="btn border-dark-subtle">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-map-pin"
-              >
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-            </button>
           </div>
         </nav>
 
-        <div class="row gx-5 justify-content-between">
+        <div
+          id="weather-section"
+          class="row justify-content-center justify-content-md-between"
+        >
           <div
-            class="col-4 d-flex flex-column gap-3 justify-content-center align-items-center"
+            class="col-12 col-md-4 d-flex flex-column gap-3 justify-content-center align-items-center"
           >
             <p id="time">05:05 PM, Mon, Nov 23, 2020</p>
             <div class="d-flex justify-content-evenly align-items-center">
@@ -170,15 +177,18 @@
               </div>
               <div class="d-flex flex-column align-items-center">
                 <p class="name-status-weather">Wind speed</p>
-                <p class="status-weather">19.2 km/j</p>
+                <p class="status-weather">19.2 km/h</p>
               </div>
             </span>
           </div>
 
           <!-- card -->
-          <div class="col-8 row">
+          <div class="col-12 col-md-8 row">
             <!-- card 1 -->
-            <div id="card-weather-days" class="card col-3 border-0 text-light">
+            <div
+              id="card-weather-days"
+              class="card col-6 col-sm-4 col-md-3 col-xl-3 border-0 text-light"
+            >
               <div
                 class="card-body d-flex flex-column gap-2 align-items-center"
               >
@@ -207,7 +217,10 @@
             </div>
 
             <!-- card 2 -->
-            <div id="card-weather-days-nonactive" class="card col-3 border-0">
+            <div
+              id="card-weather-days-nonactive"
+              class="card col-6 col-sm-4 col-md-3 col-xl-3 border-0"
+            >
               <div
                 class="card-body d-flex flex-column gap-2 align-items-center"
               >
@@ -238,7 +251,10 @@
             </div>
 
             <!-- card 3 -->
-            <div id="card-weather-days-nonactive" class="card col-3 border-0">
+            <div
+              id="card-weather-days-nonactive"
+              class="card col-6 col-sm-4 col-md-3 col-xl-3 border-0"
+            >
               <div
                 class="card-body d-flex flex-column gap-2 align-items-center"
               >
@@ -269,7 +285,10 @@
             </div>
 
             <!-- card 4 -->
-            <div id="card-weather-days-nonactive" class="card col-3 border-0">
+            <div
+              id="card-weather-days-nonactive"
+              class="card col-6 col-sm-4 col-md-3 col-xl-3 border-0"
+            >
               <div
                 class="card-body d-flex flex-column gap-2 align-items-center"
               >
@@ -300,7 +319,10 @@
             </div>
 
             <!-- card 5 -->
-            <div id="card-weather-days-nonactive" class="card col-3 border-0">
+            <div
+              id="card-weather-days-nonactive"
+              class="card col-6 col-sm-4 col-md-3 col-xl-3 border-0"
+            >
               <div
                 class="card-body d-flex flex-column gap-2 align-items-center"
               >
@@ -331,7 +353,10 @@
             </div>
 
             <!-- card 6 -->
-            <div id="card-weather-days-nonactive" class="card col-3 border-0">
+            <div
+              id="card-weather-days-nonactive"
+              class="card col-6 col-sm-4 col-md-3 col-xl-3 border-0"
+            >
               <div
                 class="card-body d-flex flex-column gap-2 align-items-center"
               >
@@ -362,7 +387,10 @@
             </div>
 
             <!-- card 7 -->
-            <div id="card-weather-days-nonactive" class="card col-3 border-0">
+            <div
+              id="card-weather-days-nonactive"
+              class="card col-6 col-sm-4 col-md-3 col-xl-3 border-0"
+            >
               <div
                 class="card-body d-flex flex-column gap-2 align-items-center"
               >
@@ -396,11 +424,15 @@
         </div>
       </div>
     </main>
+
     <!-- script bootstrap 5 -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+
+    <!-- icons weather code -->
+    <script src="descriptions.js"></script>
   </body>
 </html>
