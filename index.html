@@ -34,7 +34,7 @@
       padding: 6px 6px;
     }
 
-    #time {
+    #current-time {
       font-size: 1.25rem;
       color: gray;
     }
@@ -149,9 +149,12 @@
           <div
             class="col-12 col-md-4 d-flex flex-column gap-3 justify-content-center align-items-center"
           >
-            <p id="time">05:05 PM, Mon, Nov 23, 2020</p>
-            <div class="d-flex justify-content-evenly align-items-center">
-              <svg
+            <p id="current-time">05:05 PM, Mon, Nov 23, 2020</p>
+            <div
+              id="icons-weather-today"
+              class="d-flex justify-content-evenly align-items-center"
+            >
+              <!-- <svg
                 id="icons-weather"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -163,7 +166,12 @@
                 class="feather feather-cloud"
               >
                 <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
-              </svg>
+              </svg> -->
+              <img
+                id="current-icon-weather"
+                alt="weather image"
+                style="height: 144px"
+              />
               <div class="d-flex">
                 <h1 id="celcius">72</h1>
                 <h1>°C</h1>
@@ -434,5 +442,22 @@
 
     <!-- icons weather code -->
     <script src="descriptions.js"></script>
+
+    <!-- script code -->
+    <script>
+      const current_time_weather = document.getElementById("current-time");
+      const current_icon_weather = document.getElementById(
+        "current-icon-weather"
+      );
+      const current_temperature_2m = document.getElementById("");
+      const description_weather = document.getElementById("");
+      const current_relative_humidity_2m = document.getElementById("");
+      const current_wind_speed_10m = document.getElementById("");
+
+      const daily_day = document.getElementById("");
+      const daily_icon_weather = document.getElementById("");
+      const daily_temperature_2m_max = document.getElementById("");
+      const daily_temperature_2m_min = document.getElementById("");
+    </script>
   </body>
 </html>
