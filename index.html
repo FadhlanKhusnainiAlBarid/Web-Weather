@@ -104,7 +104,7 @@
       color: oklch(0.923 0.003 48.717);
     }
 
-    .swd-active {
+    #swd-active {
       color: rgb(255, 255, 255);
     }
 
@@ -213,16 +213,16 @@
                   <p class="name-status-weather-days nswd-active">
                     Temperature
                   </p>
-                  <span class="d-flex gap-2">
+                  <span class="d-flex gap-3">
                     <p
-                      id="daily_temperature_2m_max"
-                      class="status-weather-days swd-active"
+                      id="swd-active"
+                      class="daily_temperature_2m_max status-weather-days"
                     >
                       30%
                     </p>
                     <p
-                      id="daily_temperature_2m_min"
-                      class="status-weather-days swd-active"
+                      id="swd-active"
+                      class="daily_temperature_2m_min status-weather-days"
                     >
                       30%
                     </p>
@@ -255,17 +255,11 @@
                   <p class="name-status-weather-days nswd-nonactive">
                     Temperature
                   </p>
-                  <span class="d-flex gap-2">
-                    <p
-                      id="daily_temperature_2m_max"
-                      class="status-weather-days"
-                    >
+                  <span class="d-flex gap-3">
+                    <p class="daily_temperature_2m_max status-weather-days">
                       30%
                     </p>
-                    <p
-                      id="daily_temperature_2m_min"
-                      class="status-weather-days"
-                    >
+                    <p class="daily_temperature_2m_min status-weather-days">
                       30%
                     </p>
                   </span>
@@ -297,17 +291,11 @@
                   <p class="name-status-weather-days nswd-nonactive">
                     Temperature
                   </p>
-                  <span class="d-flex gap-2">
-                    <p
-                      id="daily_temperature_2m_max"
-                      class="status-weather-days"
-                    >
+                  <span class="d-flex gap-3">
+                    <p class="daily_temperature_2m_max status-weather-days">
                       30%
                     </p>
-                    <p
-                      id="daily_temperature_2m_min"
-                      class="status-weather-days"
-                    >
+                    <p class="daily_temperature_2m_min status-weather-days">
                       30%
                     </p>
                   </span>
@@ -339,17 +327,11 @@
                   <p class="name-status-weather-days nswd-nonactive">
                     Temperature
                   </p>
-                  <span class="d-flex gap-2">
-                    <p
-                      id="daily_temperature_2m_max"
-                      class="status-weather-days"
-                    >
+                  <span class="d-flex gap-3">
+                    <p class="daily_temperature_2m_max status-weather-days">
                       30%
                     </p>
-                    <p
-                      id="daily_temperature_2m_min"
-                      class="status-weather-days"
-                    >
+                    <p class="daily_temperature_2m_min status-weather-days">
                       30%
                     </p>
                   </span>
@@ -381,17 +363,11 @@
                   <p class="name-status-weather-days nswd-nonactive">
                     Temperature
                   </p>
-                  <span class="d-flex gap-2">
-                    <p
-                      id="daily_temperature_2m_max"
-                      class="status-weather-days"
-                    >
+                  <span class="d-flex gap-3">
+                    <p class="daily_temperature_2m_max status-weather-days">
                       30%
                     </p>
-                    <p
-                      id="daily_temperature_2m_min"
-                      class="status-weather-days"
-                    >
+                    <p class="daily_temperature_2m_min status-weather-days">
                       30%
                     </p>
                   </span>
@@ -423,17 +399,11 @@
                   <p class="name-status-weather-days nswd-nonactive">
                     Temperature
                   </p>
-                  <span class="d-flex gap-2">
-                    <p
-                      id="daily_temperature_2m_max"
-                      class="status-weather-days"
-                    >
+                  <span class="d-flex gap-3">
+                    <p class="daily_temperature_2m_max status-weather-days">
                       30%
                     </p>
-                    <p
-                      id="daily_temperature_2m_min"
-                      class="status-weather-days"
-                    >
+                    <p class="daily_temperature_2m_min status-weather-days">
                       30%
                     </p>
                   </span>
@@ -465,17 +435,11 @@
                   <p class="name-status-weather-days nswd-nonactive">
                     Temperature
                   </p>
-                  <span class="d-flex gap-2">
-                    <p
-                      id="daily_temperature_2m_max"
-                      class="status-weather-days"
-                    >
+                  <span class="d-flex gap-3">
+                    <p class="daily_temperature_2m_max status-weather-days">
                       30%
                     </p>
-                    <p
-                      id="daily_temperature_2m_min"
-                      class="status-weather-days"
-                    >
+                    <p class="daily_temperature_2m_min status-weather-days">
                       30%
                     </p>
                   </span>
@@ -500,71 +464,120 @@
 
     <!-- script code -->
     <script>
-      const search_City = document.getElementById("search_City");
+      const SEARCH_CITY = document.getElementById("SEARCH_CITY");
 
       // Get DOM for current day
-      const current_time = document.getElementById("current_time");
-      const current_icon_weather = document.getElementById(
+      const CURRENT_TIME = document.getElementById("current_time");
+      const CURRENT_ICON_WEATHER = document.getElementById(
         "current_icon_weather"
       );
-      const current_temperature_2m = document.getElementById(
+      const CURRENT_TEMPERATURE_2M = document.getElementById(
         "current_temperature_2m"
       );
-      const description_weather = document.getElementById(
+      const DESCRIPTION_WEATHER = document.getElementById(
         "description_weather"
       );
-      const current_relative_humidity_2m = document.getElementById(
+      const CURRENT_RELATIVE_HUMIDITY_2M = document.getElementById(
         "current_relative_humidity_2m"
       );
-      const current_wind_speed_10m = document.getElementById(
+      const CURRENT_WIND_SPEED_10M = document.getElementById(
         "current_wind_speed_10m"
       );
 
       // Get DOM for daily
-      const daily_day = document.querySelectorAll(".daily_day");
-      const daily_icon_weather = document.querySelectorAll(
+      const DAILY_DAY = document.querySelectorAll(".daily_day");
+      const DAILY_ICON_WEATHER = document.querySelectorAll(
         ".daily_icon_weather"
       );
-      const daily_temperature_2m_max = document.querySelectorAll(
-        "daily_temperature_2m_max"
+      const DAILY_TEMPERATURE_2M_MAX = document.querySelectorAll(
+        ".daily_temperature_2m_max"
       );
-      const daily_temperature_2m_min = document.querySelectorAll(
-        "daily_temperature_2m_min"
+      const DAILY_TEMPERATURE_2M_MIN = document.querySelectorAll(
+        ".daily_temperature_2m_min"
       );
 
-      async function getWeather() {
-        event.preventDefault();
-        const nameCity = search_City.value;
+      async function getWeather(NAME_CITY) {
+        // event.preventDefault();
+        // const NAME_CITY = SEARCH_CITY.value;
 
-        const getCityUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${nameCity}&count=1&language=en&format=json`;
+        const GET_CITY_URL = `https://geocoding-api.open-meteo.com/v1/search?name=${NAME_CITY}&count=1&language=en&format=json`;
+
+        const CURRENT_TIME_FORMATER = (COUNTRY_CODE, VALUE) => {
+          const OPTIONS = {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+            weekday: "long",
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          };
+
+          // 05:05 PM, Mon, Nov 23, 2020
+
+          const NEW_TIME = new Date(VALUE);
+          return NEW_TIME.toLocaleDateString(`en-${COUNTRY_CODE}`, OPTIONS);
+        };
+
+        const DAILY_TIME_FORMATER = (COUNTRY_CODE, VALUE) => {
+          const OPTION = {
+            weekday: "long",
+          };
+
+          const NEW_TIME = new Date(VALUE);
+          return NEW_TIME.toLocaleDateString(`en-${COUNTRY_CODE}`, OPTION);
+        };
 
         try {
-          const response_Geocoding = await fetch(getCityUrl);
-          if (!response_Geocoding.ok) {
+          const RESPONSE_GEOCODING = await fetch(GET_CITY_URL);
+          if (!RESPONSE_GEOCODING.ok) {
             console.error(error);
           }
+          const JSON_GEOCODING = await RESPONSE_GEOCODING.json();
+          const DATA_CITY = JSON_GEOCODING.results[0];
 
-          const dataCity = await response_Geocoding.json();
-          const getWeatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${dataCity.results[0].latitude}&longitude=${dataCity.results[0].longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min&current=temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code`;
-          console.log(dataCity.results[0]);
+          const GET_WEATHER_URL = `https://api.open-meteo.com/v1/forecast?latitude=${DATA_CITY.latitude}&longitude=${DATA_CITY.longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min&current=temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code`;
+          const RESPONSE_WEATHER_FORECAST = await fetch(GET_WEATHER_URL);
+          const DATA_WEATHER = await RESPONSE_WEATHER_FORECAST.json();
 
-          const response_Weather_Forecast = await fetch(getWeatherUrl);
-          const dataWeather = await response_Weather_Forecast.json();
+          if (RESPONSE_WEATHER_FORECAST.ok) {
+            CURRENT_TIME.innerText = CURRENT_TIME_FORMATER(
+              DATA_CITY.country_code,
+              DATA_WEATHER.current.time
+            );
 
-          console.log(dataWeather);
-          console.log(icons_weather);
+            CURRENT_ICON_WEATHER.src =
+              icons_weather[DATA_WEATHER.current.weather_code].day.image;
+
+            DATA_WEATHER.daily.time.forEach((value, index) => {
+              DAILY_DAY[index].innerText = DAILY_TIME_FORMATER(
+                DATA_CITY.country_code,
+                value
+              );
+
+              DAILY_ICON_WEATHER[index].src =
+                icons_weather[DATA_WEATHER.daily.weather_code[index]].day.image;
+
+              DAILY_TEMPERATURE_2M_MAX[index].innerText = `${Math.round(
+                DATA_WEATHER.daily.temperature_2m_max[index]
+              )}%`;
+
+              DAILY_TEMPERATURE_2M_MIN[index].innerText = `${Math.round(
+                DATA_WEATHER.daily.temperature_2m_max[index]
+              )}%`;
+            });
+          }
+
+          console.log(DATA_CITY);
+          console.log(DATA_WEATHER);
+          // console.log(icons_weather);
         } catch (error) {
           console.error(error);
+          console.log("error running");
         }
       }
 
-      // getWeather("Jakarta");
-
-      // function test() {
-      //   event.preventDefault();
-      //   const nameCity = search_City.value;
-      //   console.log("berhasil",nameCity);
-      // }
+      getWeather("Hong Kong");
     </script>
   </body>
 </html>
