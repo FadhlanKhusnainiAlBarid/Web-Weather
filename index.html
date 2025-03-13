@@ -34,16 +34,16 @@
       padding: 6px 6px;
     }
 
-    #current-time {
+    #current_time {
       font-size: 1.25rem;
       color: gray;
     }
 
-    #celcius {
+    .celcius {
       font-size: 4.5rem;
     }
 
-    #weather {
+    #description_weather {
       font-size: 30px;
       margin-bottom: 12px;
     }
@@ -130,16 +130,20 @@
     <main class="container d-flex flex-column">
       <div id="card" class="rounded-3">
         <nav class="navbar navbar-expand mb-5">
-          <div class="d-flex gap-2 fs-6 text text-nowrap align-items-center">
+          <form
+            onsubmit="getWeather()"
+            class="d-flex gap-2 fs-6 text text-nowrap align-items-center"
+          >
             Search city
             <input
               type="text"
               class="form-control border-dark-subtle"
               name="city"
-              id="city"
+              id="search_City"
               value="Jakarta"
             />
-          </div>
+            <button type="submit" style="display: none">hidden</button>
+          </form>
         </nav>
 
         <div
@@ -149,43 +153,36 @@
           <div
             class="col-12 col-md-4 d-flex flex-column gap-3 justify-content-center align-items-center"
           >
-            <p id="current-time">05:05 PM, Mon, Nov 23, 2020</p>
+            <p id="current_time">05:05 PM, Mon, Nov 23, 2020</p>
             <div
               id="icons-weather-today"
               class="d-flex justify-content-evenly align-items-center"
             >
-              <!-- <svg
-                id="icons-weather"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-cloud"
-              >
-                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
-              </svg> -->
               <img
-                id="current-icon-weather"
-                alt="weather image"
-                style="height: 144px"
+                aria-hidden="true"
+                id="current_icon_weather"
+                src="..."
+                alt="..."
+                style="height: 160px"
               />
               <div class="d-flex">
-                <h1 id="celcius">72</h1>
+                <h1 id="current_temperature_2m" class="celcius">72</h1>
                 <h1>°C</h1>
               </div>
             </div>
-            <h1 id="weather" class="fw-bold">Cloudy</h1>
+            <h1 id="description_weather" class="fw-bold">Cloudy</h1>
             <span id="status-weather" class="d-flex justify-content-evenly">
               <div class="d-flex flex-column align-items-center">
                 <p class="name-status-weather">Humidity</p>
-                <p class="status-weather">45%</p>
+                <p id="current_relative_humidity_2m" class="status-weather">
+                  45%
+                </p>
               </div>
               <div class="d-flex flex-column align-items-center">
                 <p class="name-status-weather">Wind speed</p>
-                <p class="status-weather">19.2 km/h</p>
+                <p id="current_wind_speed_10m" class="status-weather">
+                  19.2 km/h
+                </p>
               </div>
             </span>
           </div>
@@ -197,29 +194,39 @@
               id="card-weather-days"
               class="card col-6 col-sm-4 col-md-3 col-xl-3 border-0 text-light"
             >
-              <div
-                class="card-body d-flex flex-column gap-2 align-items-center"
-              >
-                <h5 class="card-title fs-5 fw-bold">Today</h5>
-                <svg
-                  id="icons-weather"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="feather feather-cloud"
-                >
-                  <path
-                    d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"
-                  ></path>
-                </svg>
+              <div class="card-body d-flex flex-column align-items-center">
+                <h5
+                  class="daily_day"
+                  class="card-title fs-5 fw-bold"
+                  style="margin-bottom: 0"
+                ></h5>
+
+                <img
+                  aria-hidden="true"
+                  class="daily_icon_weather"
+                  src="..."
+                  alt="..."
+                  style="width: 70%"
+                />
 
                 <div class="card-text d-flex flex-column align-items-center">
-                  <p class="name-status-weather-days nswd-active">Humidity</p>
-                  <p class="status-weather-days swd-active">30%</p>
+                  <p class="name-status-weather-days nswd-active">
+                    Temperature
+                  </p>
+                  <span class="d-flex gap-2">
+                    <p
+                      id="daily_temperature_2m_max"
+                      class="status-weather-days swd-active"
+                    >
+                      30%
+                    </p>
+                    <p
+                      id="daily_temperature_2m_min"
+                      class="status-weather-days swd-active"
+                    >
+                      30%
+                    </p>
+                  </span>
                 </div>
               </div>
             </div>
@@ -229,31 +236,39 @@
               id="card-weather-days-nonactive"
               class="card col-6 col-sm-4 col-md-3 col-xl-3 border-0"
             >
-              <div
-                class="card-body d-flex flex-column gap-2 align-items-center"
-              >
-                <h5 class="card-title fs-5 fw-bold">Today</h5>
-                <svg
-                  id="icons-weather"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="feather feather-cloud"
-                >
-                  <path
-                    d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"
-                  ></path>
-                </svg>
+              <div class="card-body d-flex flex-column align-items-center">
+                <h5
+                  class="daily_day"
+                  class="card-title fs-5 fw-bold"
+                  style="margin-bottom: 0"
+                ></h5>
+
+                <img
+                  aria-hidden="true"
+                  class="daily_icon_weather"
+                  src="..."
+                  alt="..."
+                  style="width: 70%"
+                />
 
                 <div class="card-text d-flex flex-column align-items-center">
                   <p class="name-status-weather-days nswd-nonactive">
-                    Humidity
+                    Temperature
                   </p>
-                  <p class="status-weather-days">30%</p>
+                  <span class="d-flex gap-2">
+                    <p
+                      id="daily_temperature_2m_max"
+                      class="status-weather-days"
+                    >
+                      30%
+                    </p>
+                    <p
+                      id="daily_temperature_2m_min"
+                      class="status-weather-days"
+                    >
+                      30%
+                    </p>
+                  </span>
                 </div>
               </div>
             </div>
@@ -263,31 +278,39 @@
               id="card-weather-days-nonactive"
               class="card col-6 col-sm-4 col-md-3 col-xl-3 border-0"
             >
-              <div
-                class="card-body d-flex flex-column gap-2 align-items-center"
-              >
-                <h5 class="card-title fs-5 fw-bold">Today</h5>
-                <svg
-                  id="icons-weather"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="feather feather-cloud"
-                >
-                  <path
-                    d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"
-                  ></path>
-                </svg>
+              <div class="card-body d-flex flex-column align-items-center">
+                <h5
+                  class="daily_day"
+                  class="card-title fs-5 fw-bold"
+                  style="margin-bottom: 0"
+                ></h5>
+
+                <img
+                  aria-hidden="true"
+                  class="daily_icon_weather"
+                  src="..."
+                  alt="..."
+                  style="width: 70%"
+                />
 
                 <div class="card-text d-flex flex-column align-items-center">
                   <p class="name-status-weather-days nswd-nonactive">
-                    Humidity
+                    Temperature
                   </p>
-                  <p class="status-weather-days">30%</p>
+                  <span class="d-flex gap-2">
+                    <p
+                      id="daily_temperature_2m_max"
+                      class="status-weather-days"
+                    >
+                      30%
+                    </p>
+                    <p
+                      id="daily_temperature_2m_min"
+                      class="status-weather-days"
+                    >
+                      30%
+                    </p>
+                  </span>
                 </div>
               </div>
             </div>
@@ -297,31 +320,39 @@
               id="card-weather-days-nonactive"
               class="card col-6 col-sm-4 col-md-3 col-xl-3 border-0"
             >
-              <div
-                class="card-body d-flex flex-column gap-2 align-items-center"
-              >
-                <h5 class="card-title fs-5 fw-bold">Today</h5>
-                <svg
-                  id="icons-weather"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="feather feather-cloud"
-                >
-                  <path
-                    d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"
-                  ></path>
-                </svg>
+              <div class="card-body d-flex flex-column align-items-center">
+                <h5
+                  class="daily_day"
+                  class="card-title fs-5 fw-bold"
+                  style="margin-bottom: 0"
+                ></h5>
+
+                <img
+                  aria-hidden="true"
+                  class="daily_icon_weather"
+                  src="..."
+                  alt="..."
+                  style="width: 70%"
+                />
 
                 <div class="card-text d-flex flex-column align-items-center">
                   <p class="name-status-weather-days nswd-nonactive">
-                    Humidity
+                    Temperature
                   </p>
-                  <p class="status-weather-days">30%</p>
+                  <span class="d-flex gap-2">
+                    <p
+                      id="daily_temperature_2m_max"
+                      class="status-weather-days"
+                    >
+                      30%
+                    </p>
+                    <p
+                      id="daily_temperature_2m_min"
+                      class="status-weather-days"
+                    >
+                      30%
+                    </p>
+                  </span>
                 </div>
               </div>
             </div>
@@ -331,31 +362,39 @@
               id="card-weather-days-nonactive"
               class="card col-6 col-sm-4 col-md-3 col-xl-3 border-0"
             >
-              <div
-                class="card-body d-flex flex-column gap-2 align-items-center"
-              >
-                <h5 class="card-title fs-5 fw-bold">Today</h5>
-                <svg
-                  id="icons-weather"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="feather feather-cloud"
-                >
-                  <path
-                    d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"
-                  ></path>
-                </svg>
+              <div class="card-body d-flex flex-column align-items-center">
+                <h5
+                  class="daily_day"
+                  class="card-title fs-5 fw-bold"
+                  style="margin-bottom: 0"
+                ></h5>
+
+                <img
+                  aria-hidden="true"
+                  class="daily_icon_weather"
+                  src="..."
+                  alt="..."
+                  style="width: 70%"
+                />
 
                 <div class="card-text d-flex flex-column align-items-center">
                   <p class="name-status-weather-days nswd-nonactive">
-                    Humidity
+                    Temperature
                   </p>
-                  <p class="status-weather-days">30%</p>
+                  <span class="d-flex gap-2">
+                    <p
+                      id="daily_temperature_2m_max"
+                      class="status-weather-days"
+                    >
+                      30%
+                    </p>
+                    <p
+                      id="daily_temperature_2m_min"
+                      class="status-weather-days"
+                    >
+                      30%
+                    </p>
+                  </span>
                 </div>
               </div>
             </div>
@@ -365,31 +404,39 @@
               id="card-weather-days-nonactive"
               class="card col-6 col-sm-4 col-md-3 col-xl-3 border-0"
             >
-              <div
-                class="card-body d-flex flex-column gap-2 align-items-center"
-              >
-                <h5 class="card-title fs-5 fw-bold">Today</h5>
-                <svg
-                  id="icons-weather"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="feather feather-cloud"
-                >
-                  <path
-                    d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"
-                  ></path>
-                </svg>
+              <div class="card-body d-flex flex-column align-items-center">
+                <h5
+                  class="daily_day"
+                  class="card-title fs-5 fw-bold"
+                  style="margin-bottom: 0"
+                ></h5>
+
+                <img
+                  aria-hidden="true"
+                  class="daily_icon_weather"
+                  src="..."
+                  alt="..."
+                  style="width: 70%"
+                />
 
                 <div class="card-text d-flex flex-column align-items-center">
                   <p class="name-status-weather-days nswd-nonactive">
-                    Humidity
+                    Temperature
                   </p>
-                  <p class="status-weather-days">30%</p>
+                  <span class="d-flex gap-2">
+                    <p
+                      id="daily_temperature_2m_max"
+                      class="status-weather-days"
+                    >
+                      30%
+                    </p>
+                    <p
+                      id="daily_temperature_2m_min"
+                      class="status-weather-days"
+                    >
+                      30%
+                    </p>
+                  </span>
                 </div>
               </div>
             </div>
@@ -399,31 +446,39 @@
               id="card-weather-days-nonactive"
               class="card col-6 col-sm-4 col-md-3 col-xl-3 border-0"
             >
-              <div
-                class="card-body d-flex flex-column gap-2 align-items-center"
-              >
-                <h5 class="card-title fs-5 fw-bold">Today</h5>
-                <svg
-                  id="icons-weather"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="feather feather-cloud"
-                >
-                  <path
-                    d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"
-                  ></path>
-                </svg>
+              <div class="card-body d-flex flex-column align-items-center">
+                <h5
+                  class="daily_day"
+                  class="card-title fs-5 fw-bold"
+                  style="margin-bottom: 0"
+                ></h5>
+
+                <img
+                  aria-hidden="true"
+                  class="daily_icon_weather"
+                  src="..."
+                  alt="..."
+                  style="width: 70%"
+                />
 
                 <div class="card-text d-flex flex-column align-items-center">
                   <p class="name-status-weather-days nswd-nonactive">
-                    Humidity
+                    Temperature
                   </p>
-                  <p class="status-weather-days">30%</p>
+                  <span class="d-flex gap-2">
+                    <p
+                      id="daily_temperature_2m_max"
+                      class="status-weather-days"
+                    >
+                      30%
+                    </p>
+                    <p
+                      id="daily_temperature_2m_min"
+                      class="status-weather-days"
+                    >
+                      30%
+                    </p>
+                  </span>
                 </div>
               </div>
             </div>
@@ -445,19 +500,71 @@
 
     <!-- script code -->
     <script>
-      const current_time_weather = document.getElementById("current-time");
-      const current_icon_weather = document.getElementById(
-        "current-icon-weather"
-      );
-      const current_temperature_2m = document.getElementById("");
-      const description_weather = document.getElementById("");
-      const current_relative_humidity_2m = document.getElementById("");
-      const current_wind_speed_10m = document.getElementById("");
+      const search_City = document.getElementById("search_City");
 
-      const daily_day = document.getElementById("");
-      const daily_icon_weather = document.getElementById("");
-      const daily_temperature_2m_max = document.getElementById("");
-      const daily_temperature_2m_min = document.getElementById("");
+      // Get DOM for current day
+      const current_time = document.getElementById("current_time");
+      const current_icon_weather = document.getElementById(
+        "current_icon_weather"
+      );
+      const current_temperature_2m = document.getElementById(
+        "current_temperature_2m"
+      );
+      const description_weather = document.getElementById(
+        "description_weather"
+      );
+      const current_relative_humidity_2m = document.getElementById(
+        "current_relative_humidity_2m"
+      );
+      const current_wind_speed_10m = document.getElementById(
+        "current_wind_speed_10m"
+      );
+
+      // Get DOM for daily
+      const daily_day = document.querySelectorAll(".daily_day");
+      const daily_icon_weather = document.querySelectorAll(
+        ".daily_icon_weather"
+      );
+      const daily_temperature_2m_max = document.querySelectorAll(
+        "daily_temperature_2m_max"
+      );
+      const daily_temperature_2m_min = document.querySelectorAll(
+        "daily_temperature_2m_min"
+      );
+
+      async function getWeather() {
+        event.preventDefault();
+        const nameCity = search_City.value;
+
+        const getCityUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${nameCity}&count=1&language=en&format=json`;
+
+        try {
+          const response_Geocoding = await fetch(getCityUrl);
+          if (!response_Geocoding.ok) {
+            console.error(error);
+          }
+
+          const dataCity = await response_Geocoding.json();
+          const getWeatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${dataCity.results[0].latitude}&longitude=${dataCity.results[0].longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min&current=temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code`;
+          console.log(dataCity.results[0]);
+
+          const response_Weather_Forecast = await fetch(getWeatherUrl);
+          const dataWeather = await response_Weather_Forecast.json();
+
+          console.log(dataWeather);
+          console.log(icons_weather);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      // getWeather("Jakarta");
+
+      // function test() {
+      //   event.preventDefault();
+      //   const nameCity = search_City.value;
+      //   console.log("berhasil",nameCity);
+      // }
     </script>
   </body>
 </html>
