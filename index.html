@@ -63,7 +63,6 @@
 
     .card_weather_days {
       height: fit-content;
-      /* background-color: rgb(85, 150, 246); */
       background-color: transparent;
     }
 
@@ -98,24 +97,11 @@
       color: oklch(0.923 0.003 48.717);
     }
 
-    /* .nswd-nonactive {
-      color: oklch(0.709 0.01 56.259);
-    } */
-
     .status-weather-days {
       font-size: 1.25rem;
       margin-bottom: 0;
       color: rgb(255, 255, 255);
     }
-
-    /* .nswd-active {
-      color: oklch(0.923 0.003 48.717);
-    }
-
-    .swd-active {
-      color: rgb(255, 255, 255);
-    } */
-
     @media screen and (min-width: 768px) {
       main {
         justify-content: center;
@@ -152,7 +138,6 @@
               name="city"
               id="search_City"
             />
-            <button type="submit" style="display: none">hidden</button>
           </form>
         </nav>
 
@@ -163,14 +148,12 @@
           <div
             class="col-12 col-md-4 d-flex flex-column gap-3 justify-content-center align-items-center"
           >
-            <!-- <p id="current_time"></p> -->
             <p
               id="current_time"
-              class="placeholder-glow d-flex justify-content-center"
+              class="placeholder-glow d-flex justify-content-center text-center"
               style="width: 100%"
             >
-              <!-- <span class="placeholder" style="width: 70%"></span> -->
-              <!-- <p id="current_time">13n0i130n</p> -->
+              <span class="placeholder" style="height: 25px; width: 80%"></span>
             </p>
             <div
               id="icons-weather-today"
@@ -179,20 +162,24 @@
               <img
                 aria-hidden="true"
                 id="current_icon_weather"
+                class="placeholder"
+                style="height: 96px; width: 96px"
                 src="..."
                 alt="..."
               />
               <div id="current_temperature_2m" class="d-flex">
-                <!-- <span
+                <span
                   class="placeholder"
                   style="height: 96px; width: 96px"
-                ></span> -->
-                <!-- <h1 class="celcius">72</h1>
-                <h1>°C</h1> -->
+                ></span>
               </div>
             </div>
-            <h1 id="description_weather" class="fw-bold placeholder-glow">
-              <!-- <span class="placeholder" style="height: 96px; width: 64px;"></span> -->
+            <h1
+              id="description_weather"
+              class="fw-bold d-flex justify-content-center placeholder-glow"
+              style="width: 100%"
+            >
+              <span class="placeholder" style="height: 30px; width: 30%"></span>
             </h1>
             <span id="status-weather" class="d-flex justify-content-evenly">
               <div class="d-flex flex-column align-items-center">
@@ -201,10 +188,10 @@
                   id="current_relative_humidity_2m"
                   class="status-weather placeholder-glow"
                 >
-                  <!-- <span
-                  class="placeholder"
-                  style="height: 36px; width: 36px"
-                ></span> -->
+                  <span
+                    class="placeholder"
+                    style="height: 30px; width: 36px"
+                  ></span>
                 </p>
               </div>
               <div class="d-flex flex-column align-items-center">
@@ -213,10 +200,10 @@
                   id="current_wind_speed_10m"
                   class="status-weather placeholder-glow"
                 >
-                  <!-- <span
-                  class="placeholder"
-                  style="height: 106px; width: 36px"
-                ></span> -->
+                  <span
+                    class="placeholder"
+                    style="height: 30px; width: 64px"
+                  ></span>
                 </p>
               </div>
             </span>
@@ -224,200 +211,191 @@
 
           <!-- card -->
           <div id="row-card-daily" class="col-12 col-md-8 row">
-            <div
-              class="card_weather_days card col-6 col-sm-4 col-md-4 col-xl-3 border-0 text-light"
-            >
+            <!-- card nomer 1 -->
+            <div class="card_weather_days card col-4 border-0 text-light">
               <div class="card-body d-flex flex-column align-items-center">
                 <h5
-                  class="daily_day card-title fs-5 fw-bold"
-                  style="margin-bottom: 0"
-                ></h5>
+                  class="daily_day card-title fs-5 fw-bold d-flex justify-content-center"
+                  style="margin-bottom: 0; width: 100%"
+                >
+                  <span
+                    class="placeholder"
+                    style="height: 24px; width: 40%"
+                  ></span>
+                </h5>
 
                 <img
                   aria-hidden="true"
-                  class="daily_icon_weather"
+                  class="daily_icon_weather placeholder"
                   src="..."
                   alt="..."
-                  style="width: 70%"
+                  style="height: 64px; width: 64px; margin: 35px"
                 />
 
                 <div class="card-text d-flex flex-column align-items-center">
-                  <p class="name-status-weather-days nswd-active">
-                    Temperature
-                  </p>
-                  <span class="d-flex gap-3">
-                    <span
-                      class="daily_temperature_2m_max status-weather-days d-flex"
-                    >
-                    </span>
-                    <span
-                      class="daily_temperature_2m_min status-weather-days d-flex"
-                    ></span>
+                  <p class="name-status-weather-days">Temperature</p>
+                  <span
+                    class="maximum_apparent_temperature status-weather-days d-flex placeholder"
+                    style="height: 30px; width: 34px"
+                  >
                   </span>
                 </div>
               </div>
             </div>
-            <div
-              class="card_weather_days card col-6 col-sm-4 col-md-4 col-xl-3 border-0 text-light"
-            >
+
+            <!-- card nomer 2 -->
+            <div class="card_weather_days card col-4 border-0 text-light">
               <div class="card-body d-flex flex-column align-items-center">
                 <h5
-                  class="daily_day card-title fs-5 fw-bold"
-                  style="margin-bottom: 0"
-                ></h5>
+                  class="daily_day card-title fs-5 fw-bold d-flex justify-content-center"
+                  style="margin-bottom: 0; width: 100%"
+                >
+                  <span
+                    class="placeholder"
+                    style="height: 24px; width: 40%"
+                  ></span>
+                </h5>
 
                 <img
                   aria-hidden="true"
-                  class="daily_icon_weather"
+                  class="daily_icon_weather placeholder"
                   src="..."
                   alt="..."
-                  style="width: 70%"
+                  style="height: 64px; width: 64px; margin: 35px"
                 />
 
                 <div class="card-text d-flex flex-column align-items-center">
-                  <p class="name-status-weather-days nswd-nonactive">
-                    Temperature
-                  </p>
-                  <span class="d-flex gap-3">
-                    <span
-                      class="daily_temperature_2m_max status-weather-days d-flex"
-                    >
-                    </span>
-                    <span
-                      class="daily_temperature_2m_min status-weather-days d-flex"
-                    ></span>
+                  <p class="name-status-weather-days">Temperature</p>
+                  <span
+                    class="maximum_apparent_temperature status-weather-days d-flex placeholder"
+                    style="height: 30px; width: 34px"
+                  >
                   </span>
                 </div>
               </div>
             </div>
-            <div
-              class="card_weather_days card col-6 col-sm-4 col-md-4 col-xl-3 border-0 text-light"
-            >
+            <!-- card nomer 1 -->
+            <div class="card_weather_days card col-4 border-0 text-light">
               <div class="card-body d-flex flex-column align-items-center">
                 <h5
-                  class="daily_day card-title fs-5 fw-bold"
-                  style="margin-bottom: 0"
-                ></h5>
+                  class="daily_day card-title fs-5 fw-bold d-flex justify-content-center"
+                  style="margin-bottom: 0; width: 100%"
+                >
+                  <span
+                    class="placeholder"
+                    style="height: 24px; width: 40%"
+                  ></span>
+                </h5>
 
                 <img
                   aria-hidden="true"
-                  class="daily_icon_weather"
+                  class="daily_icon_weather placeholder"
                   src="..."
                   alt="..."
-                  style="width: 70%"
+                  style="height: 64px; width: 64px; margin: 35px"
                 />
 
                 <div class="card-text d-flex flex-column align-items-center">
-                  <p class="name-status-weather-days nswd-nonactive">
-                    Temperature
-                  </p>
-                  <span class="d-flex gap-3">
-                    <span
-                      class="daily_temperature_2m_max status-weather-days d-flex"
-                    >
-                    </span>
-                    <span
-                      class="daily_temperature_2m_min status-weather-days d-flex"
-                    ></span>
+                  <p class="name-status-weather-days">Temperature</p>
+                  <span
+                    class="maximum_apparent_temperature status-weather-days d-flex placeholder"
+                    style="height: 30px; width: 34px"
+                  >
                   </span>
                 </div>
               </div>
             </div>
-            <div
-              class="card_weather_days card col-6 col-sm-4 col-md-4 col-xl-3 border-0 text-light"
-            >
+
+            <!-- card nomer 2 -->
+            <div class="card_weather_days card col-4 border-0 text-light">
               <div class="card-body d-flex flex-column align-items-center">
                 <h5
-                  class="daily_day card-title fs-5 fw-bold"
-                  style="margin-bottom: 0"
-                ></h5>
+                  class="daily_day card-title fs-5 fw-bold d-flex justify-content-center"
+                  style="margin-bottom: 0; width: 100%"
+                >
+                  <span
+                    class="placeholder"
+                    style="height: 24px; width: 40%"
+                  ></span>
+                </h5>
 
                 <img
                   aria-hidden="true"
-                  class="daily_icon_weather"
+                  class="daily_icon_weather placeholder"
                   src="..."
                   alt="..."
-                  style="width: 70%"
+                  style="height: 64px; width: 64px; margin: 35px"
                 />
 
                 <div class="card-text d-flex flex-column align-items-center">
-                  <p class="name-status-weather-days nswd-nonactive">
-                    Temperature
-                  </p>
-                  <span class="d-flex gap-3">
-                    <span
-                      class="daily_temperature_2m_max status-weather-days d-flex"
-                    >
-                    </span>
-                    <span
-                      class="daily_temperature_2m_min status-weather-days d-flex"
-                    ></span>
+                  <p class="name-status-weather-days">Temperature</p>
+                  <span
+                    class="maximum_apparent_temperature status-weather-days d-flex placeholder"
+                    style="height: 30px; width: 34px"
+                  >
                   </span>
                 </div>
               </div>
             </div>
-            <div
-              class="card_weather_days card col-6 col-sm-4 col-md-4 col-xl-3 border-0 text-light"
-            >
+            <!-- card nomer 1 -->
+            <div class="card_weather_days card col-4 border-0 text-light">
               <div class="card-body d-flex flex-column align-items-center">
                 <h5
-                  class="daily_day card-title fs-5 fw-bold"
-                  style="margin-bottom: 0"
-                ></h5>
+                  class="daily_day card-title fs-5 fw-bold d-flex justify-content-center"
+                  style="margin-bottom: 0; width: 100%"
+                >
+                  <span
+                    class="placeholder"
+                    style="height: 24px; width: 40%"
+                  ></span>
+                </h5>
 
                 <img
                   aria-hidden="true"
-                  class="daily_icon_weather"
+                  class="daily_icon_weather placeholder"
                   src="..."
                   alt="..."
-                  style="width: 70%"
+                  style="height: 64px; width: 64px; margin: 35px"
                 />
 
                 <div class="card-text d-flex flex-column align-items-center">
-                  <p class="name-status-weather-days nswd-nonactive">
-                    Temperature
-                  </p>
-                  <span class="d-flex gap-3">
-                    <span
-                      class="daily_temperature_2m_max status-weather-days d-flex"
-                    >
-                    </span>
-                    <span
-                      class="daily_temperature_2m_min status-weather-days d-flex"
-                    ></span>
+                  <p class="name-status-weather-days">Temperature</p>
+                  <span
+                    class="maximum_apparent_temperature status-weather-days d-flex placeholder"
+                    style="height: 30px; width: 34px"
+                  >
                   </span>
                 </div>
               </div>
             </div>
-            <div
-              class="card_weather_days card col-6 col-sm-4 col-md-4 col-xl-3 border-0 text-light"
-            >
+
+            <!-- card nomer 2 -->
+            <div class="card_weather_days card col-4 border-0 text-light">
               <div class="card-body d-flex flex-column align-items-center">
                 <h5
-                  class="daily_day card-title fs-5 fw-bold"
-                  style="margin-bottom: 0"
-                ></h5>
+                  class="daily_day card-title fs-5 fw-bold d-flex justify-content-center"
+                  style="margin-bottom: 0; width: 100%"
+                >
+                  <span
+                    class="placeholder"
+                    style="height: 24px; width: 40%"
+                  ></span>
+                </h5>
 
                 <img
                   aria-hidden="true"
-                  class="daily_icon_weather"
+                  class="daily_icon_weather placeholder"
                   src="..."
                   alt="..."
-                  style="width: 70%"
+                  style="height: 64px; width: 64px; margin: 35px"
                 />
 
                 <div class="card-text d-flex flex-column align-items-center">
-                  <p class="name-status-weather-days nswd-nonactive">
-                    Temperature
-                  </p>
-                  <span class="d-flex gap-3">
-                    <span
-                      class="daily_temperature_2m_max status-weather-days d-flex"
-                    >
-                    </span>
-                    <span
-                      class="daily_temperature_2m_min status-weather-days d-flex"
-                    ></span>
+                  <p class="name-status-weather-days">Temperature</p>
+                  <span
+                    class="maximum_apparent_temperature status-weather-days d-flex placeholder"
+                    style="height: 30px; width: 34px"
+                  >
                   </span>
                 </div>
               </div>
@@ -461,18 +439,14 @@
       );
 
       // Get DOM for daily
-      const ROW_CARD_DAILY = document.getElementById("row-card-daily");
       const CARD_DAILY = document.querySelectorAll(".card_weather_days");
       const LOADING_DAILY = document.getElementById("loading_daily");
       const DAILY_DAY = document.querySelectorAll(".daily_day");
       const DAILY_ICON_WEATHER = document.querySelectorAll(
         ".daily_icon_weather"
       );
-      const DAILY_TEMPERATURE_2M_MAX = document.querySelectorAll(
-        ".daily_temperature_2m_max"
-      );
-      const DAILY_TEMPERATURE_2M_MIN = document.querySelectorAll(
-        ".daily_temperature_2m_min"
+      const DAILY_APPARENT_TEMPERATURE = document.querySelectorAll(
+        ".maximum_apparent_temperature"
       );
 
       document
@@ -490,23 +464,18 @@
               position.coords.longitude
             );
             getWeather(position.coords.latitude, position.coords.longitude);
-            console.log(position.coords.latitude, position.coords.longitude);
           },
           (error) => {
-            // console.log("location di tolak");
             getCityDataByName("Indonesia");
             SEARCH_CITY.value = "Indonesia";
           }
         );
       });
 
-      // https://nominatim.openstreetmap.org/reverse.php?lat=23.05277&lon=283.12500&zoom=10&format=jsonv2
-
       const getCityDataByLatLon = async (latitude, longitude) => {
         const GET_CITY_URL = `https://nominatim.openstreetmap.org/reverse.php?lat=${latitude}&lon=${longitude}&zoom=10&format=jsonv2`;
         const response = await fetch(GET_CITY_URL);
         const json = await response.json();
-        console.log(json);
         const city = json.address.region;
         SEARCH_CITY.value = city;
       };
@@ -520,7 +489,7 @@
       };
 
       const getWeatherData = async (latitude, longitude) => {
-        const GET_WEATHER_URL = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min&current=temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code`;
+        const GET_WEATHER_URL = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,apparent_temperature_max&hourly=temperature_2m&current=temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code`;
         const response = await fetch(GET_WEATHER_URL);
         const json = await response.json();
         return json;
@@ -550,138 +519,95 @@
         return NEW_TIME.toLocaleDateString("en-US", OPTION);
       };
 
-      const changeDomContent = () => {};
+      const dataLoading = () => {
+        CURRENT_TIME.innerHTML = `<span class="placeholder" style="height: 25px; width: 80%"></span>`;
+
+        CURRENT_ICON_WEATHER.src = "...";
+        CURRENT_ICON_WEATHER.style = "height: 96px; width: 96px";
+        CURRENT_ICON_WEATHER.classList.add("placeholder");
+
+        CURRENT_TEMPERATURE_2M.innerHTML = `<span
+                  class="placeholder"
+                  style="height: 96px; width: 96px"
+                ></span`;
+
+        CURRENT_DESCRIPTION_WEATHER.innerHTML = `<span class="placeholder" style="height: 30px; width: 30%"></span>`;
+
+        CURRENT_RELATIVE_HUMIDITY_2M.innerHTML = `<span
+                    class="placeholder"
+                    style="height: 30px; width: 36px"
+                  ></span>`;
+
+        CURRENT_WIND_SPEED_10M.innerHTML = `<span
+                    class="placeholder"
+                    style="height: 30px; width: 64px"
+                  ></span>`;
+
+        for (let i = 0; i < 6; i++) {
+          DAILY_DAY[i].innerHTML = `<span
+                    class="placeholder"
+                    style="height: 24px; width: 40%"
+                  ></span>`;
+
+          DAILY_ICON_WEATHER[i].src = "...";
+          DAILY_ICON_WEATHER[i].classList.add("placeholder");
+          DAILY_ICON_WEATHER[i].style =
+            "height: 64px; width: 64px; margin: 35px";
+
+          DAILY_APPARENT_TEMPERATURE[i].classList.add("placeholder");
+          DAILY_APPARENT_TEMPERATURE[i].style = "height: 30px; width: 34px";
+        }
+      };
+
+      const dataBinding = (dataWeather) => {
+        CURRENT_TIME.innerText = CURRENT_TIME_FORMATER(
+          dataWeather.current.time
+        );
+
+        CURRENT_ICON_WEATHER.style = "height: 144px; width: 144px";
+        CURRENT_ICON_WEATHER.classList.remove("placeholder");
+        CURRENT_ICON_WEATHER.src =
+          icons_weather[dataWeather.current.weather_code].day.image;
+
+        CURRENT_TEMPERATURE_2M.innerHTML = `<h1 id="celcius">${dataWeather.current.temperature_2m}</h1>
+                <h5>°C</h5>`;
+
+        CURRENT_DESCRIPTION_WEATHER.innerText =
+          icons_weather[dataWeather.current.weather_code].day.description;
+
+        CURRENT_RELATIVE_HUMIDITY_2M.innerText = `${dataWeather.current.relative_humidity_2m}%`;
+
+        CURRENT_WIND_SPEED_10M.innerText = `${dataWeather.current.wind_speed_10m} km/h`;
+
+        for (let i = 0; i < 6; i++) {
+          DAILY_DAY[i].innerText = DAILY_TIME_FORMATER(
+            dataWeather.daily.time[i + 1]
+          );
+
+          DAILY_ICON_WEATHER[i].classList.remove("placeholder");
+          DAILY_ICON_WEATHER[i].style = "width: 70%";
+          DAILY_ICON_WEATHER[i].src =
+            icons_weather[dataWeather.daily.weather_code[i + 1]].day.image;
+
+          DAILY_APPARENT_TEMPERATURE[i].classList.remove("placeholder");
+          DAILY_APPARENT_TEMPERATURE[i].style = "";
+          DAILY_APPARENT_TEMPERATURE[i].innerHTML = `${Math.round(
+            dataWeather.daily.apparent_temperature_max[i + 1]
+          )}<p style="font-size: 13px">&#8451;</p>`;
+        }
+      };
 
       async function getWeather(latitude, longitude) {
+        dataLoading();
+
         try {
           const dataWeather = await getWeatherData(latitude, longitude);
-          console.log(dataWeather);
+
+          dataBinding(dataWeather);
         } catch (error) {
           console.error(error);
         }
       }
-
-      // async function getWeather() {
-      //   event.preventDefault();
-      //   const NAME_CITY = SEARCH_CITY.value;
-
-      //   CURRENT_TIME.innerHTML = `<span class="placeholder" style="height: 30px;width: 70%"></span>`;
-
-      //   CURRENT_ICON_WEATHER.src = "...";
-      //   CURRENT_ICON_WEATHER.style = "width: 96px; height: 96px";
-      //   CURRENT_ICON_WEATHER.className = "placeholder";
-
-      //   CURRENT_DESCRIPTION_WEATHER.innerHTML = `<span class="placeholder" style="height: 36px; width: 96px;"></span>`;
-
-      //   CURRENT_TEMPERATURE_2M.innerHTML = `<span
-      //             class="placeholder"
-      //             style="height: 96px; width: 96px"
-      //           ></span>`;
-
-      //   CURRENT_RELATIVE_HUMIDITY_2M.innerHTML = `<span
-      //             class="placeholder"
-      //             style="height: 36px; width: 36px"
-      //           ></span>`;
-
-      //   ROW_CARD_DAILY.classList.add(
-      //     "justify-content-center",
-      //     "align-items-center"
-      //   );
-
-      //   for (let i = 0; i < 6; i++) {
-      //     CARD_DAILY[i].style = "display: none";
-      //   }
-
-      //   CURRENT_WIND_SPEED_10M.innerHTML = `<span
-      //             class="placeholder"
-      //             style="height: 36px; width: 106px"
-      //           ></span>`;
-
-      //   LOADING_DAILY.style = "height: 122px; width: 122px; padding: 0";
-
-      //   try {
-      //     const JSON_GEOCODING = await getCityData(NAME_CITY);
-      //     const DATA_CITY = JSON_GEOCODING.results[0];
-
-      //     // const RESPONSE_WEATHER_FORECAST = await getWeatherData(
-      //     //   DATA_CITY.latitude,
-      //     //   DATA_CITY.longitude
-      //     // );
-      //     const DATA_WEATHER = await getWeatherData(
-      //       DATA_CITY.latitude,
-      //       DATA_CITY.longitude
-      //     );
-
-      //     // placeing data to DOM
-      //     // Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit molestiae at quia error. Animi ea maxime voluptate vitae, iusto quasi necessitatibus sint unde praesentium cum odio consequuntur qui veniam possimus.
-      //     if (DATA_WEATHER) {
-      //       CURRENT_ICON_WEATHER.className = "";
-      //       CURRENT_ICON_WEATHER.style = "width: 160px";
-
-      //       CURRENT_TIME.innerText = CURRENT_TIME_FORMATER(
-      //         DATA_CITY.country_code,
-      //         DATA_WEATHER.current.time
-      //       );
-
-      //       CURRENT_ICON_WEATHER.src =
-      //         icons_weather[DATA_WEATHER.current.weather_code].day.image;
-
-      //       CURRENT_TEMPERATURE_2M.innerHTML = `<h1 class="celcius">${Math.round(
-      //         DATA_WEATHER.current.temperature_2m
-      //       )}</h1>
-      //           <h1>&#8451;</h1>`;
-
-      //       CURRENT_DESCRIPTION_WEATHER.innerText =
-      //         icons_weather[DATA_WEATHER.current.weather_code].day.description;
-
-      //       CURRENT_RELATIVE_HUMIDITY_2M.innerText =
-      //         DATA_WEATHER.current.relative_humidity_2m +
-      //         DATA_WEATHER.current_units.relative_humidity_2m;
-
-      //       CURRENT_WIND_SPEED_10M.innerText =
-      //         DATA_WEATHER.current.wind_speed_10m +
-      //         DATA_WEATHER.current_units.wind_speed_10m;
-
-      //       ROW_CARD_DAILY.classList.remove(
-      //         "justify-content-center",
-      //         "align-items-center"
-      //       );
-      //       LOADING_DAILY.style = "display: none";
-      //       DATA_WEATHER.daily.time.forEach((_, index) => {
-      //         if (index < 6) {
-      //           CARD_DAILY[index].style = "display: block";
-      //           DAILY_DAY[index].innerText = DAILY_TIME_FORMATER(
-      //             DATA_CITY.country_code,
-      //             DATA_WEATHER.daily.time[index + 1]
-      //           );
-
-      //           DAILY_ICON_WEATHER[index].src =
-      //             icons_weather[
-      //               DATA_WEATHER.daily.weather_code[index + 1]
-      //             ].day.image;
-
-      //           DAILY_TEMPERATURE_2M_MAX[index].innerHTML = `${Math.round(
-      //             DATA_WEATHER.daily.temperature_2m_max[index + 1]
-      //           )}<p style="font-size: 13px">&#8451;</p>`;
-
-      //           DAILY_TEMPERATURE_2M_MIN[index].innerHTML = `${Math.round(
-      //             DATA_WEATHER.daily.temperature_2m_max[index + 1]
-      //           )}<p style="font-size: 13px">&#8451;</p>`;
-      //         }
-      //       });
-      //     }
-
-      //     console.log(DATA_CITY);
-      //     console.log(DATA_WEATHER);
-      //     console.log(icons_weather);
-      //   } catch (error) {
-      //     console.error(error);
-      //     console.log("Kota tidak di temukan");
-      //   }
-      //   // navigator.geolocation.getCurrentPosition((position) => {
-      //   //   doSomething(position.coords.latitude, position.coords.longitude);
-      //   // });
-      // }
     </script>
   </body>
 </html>

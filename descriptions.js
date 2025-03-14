@@ -1,4 +1,3 @@
-
 const icons_weather = {
 	"0": {
 		"day": {
