@@ -120,9 +120,11 @@
       main {
         justify-content: center;
       }
+
       #weather-section {
         gap: 0;
       }
+
       #card {
         padding: 24px;
       }
@@ -134,21 +136,21 @@
       }
     }
   </style>
+
   <body>
     <main class="container d-flex flex-column">
       <div id="card" class="rounded-3">
         <nav class="navbar navbar-expand mb-5">
           <form
-            onsubmit="getWeather()"
+            id="form-search-city"
             class="d-flex gap-2 fs-6 text text-nowrap align-items-center"
           >
-            Search city
+            Search location
             <input
               type="text"
               class="form-control border-dark-subtle"
               name="city"
               id="search_City"
-              value="Jakarta"
             />
             <button type="submit" style="display: none">hidden</button>
           </form>
@@ -222,8 +224,6 @@
 
           <!-- card -->
           <div id="row-card-daily" class="col-12 col-md-8 row">
-            <img id="loading_daily" src=".\images\Loading.gif" alt="" />
-
             <div
               class="card_weather_days card col-6 col-sm-4 col-md-4 col-xl-3 border-0 text-light"
             >
@@ -438,13 +438,6 @@
     <!-- icons weather code -->
     <script src="descriptions.js"></script>
 
-    <!-- script geoplugin search loaction user -->
-    <script
-      language="JavaScript"
-      src="http://www.geoplugin.net/javascript.gp"
-      type="text/javascript"
-    ></script>
-
     <!-- script code -->
     <script>
       const SEARCH_CITY = document.getElementById("search_City");
@@ -482,161 +475,213 @@
         ".daily_temperature_2m_min"
       );
 
-      //
-      document.addEventListener("DOMContentLoaded", () => {
-        SEARCH_CITY.value = geoplugin_city();
-        // SEARCH_CITY.value = "nue19en01nn&";
+      document
+        .querySelector("#form-search-city")
+        .addEventListener("submit", () => {
+          event.preventDefault();
+          getCityDataByName(SEARCH_CITY.value);
+        });
 
-        getWeather();
+      document.addEventListener("DOMContentLoaded", () => {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            getCityDataByLatLon(
+              position.coords.latitude,
+              position.coords.longitude
+            );
+            getWeather(position.coords.latitude, position.coords.longitude);
+            console.log(position.coords.latitude, position.coords.longitude);
+          },
+          (error) => {
+            // console.log("location di tolak");
+            getCityDataByName("Indonesia");
+            SEARCH_CITY.value = "Indonesia";
+          }
+        );
       });
 
-      async function getWeather() {
-        event.preventDefault();
-        const NAME_CITY = SEARCH_CITY.value;
+      // https://nominatim.openstreetmap.org/reverse.php?lat=23.05277&lon=283.12500&zoom=10&format=jsonv2
 
-        CURRENT_TIME.innerHTML = `<span class="placeholder" style="height: 30px;width: 70%"></span>`;
+      const getCityDataByLatLon = async (latitude, longitude) => {
+        const GET_CITY_URL = `https://nominatim.openstreetmap.org/reverse.php?lat=${latitude}&lon=${longitude}&zoom=10&format=jsonv2`;
+        const response = await fetch(GET_CITY_URL);
+        const json = await response.json();
+        console.log(json);
+        const city = json.address.region;
+        SEARCH_CITY.value = city;
+      };
 
-        CURRENT_ICON_WEATHER.src = "...";
-        CURRENT_ICON_WEATHER.style = "width: 96px; height: 96px";
-        CURRENT_ICON_WEATHER.className = "placeholder";
-
-        CURRENT_DESCRIPTION_WEATHER.innerHTML = `<span class="placeholder" style="height: 36px; width: 96px;"></span>`;
-
-        CURRENT_TEMPERATURE_2M.innerHTML = `<span
-                  class="placeholder"
-                  style="height: 96px; width: 96px"
-                ></span>`;
-
-        CURRENT_RELATIVE_HUMIDITY_2M.innerHTML = `<span
-                  class="placeholder"
-                  style="height: 36px; width: 36px"
-                ></span>`;
-
-        ROW_CARD_DAILY.classList.add(
-          "justify-content-center",
-          "align-items-center"
-        );
-
-        for (let i = 0; i < 6; i++) {
-          CARD_DAILY[i].style = "display: none";
-        }
-
-        CURRENT_WIND_SPEED_10M.innerHTML = `<span
-                  class="placeholder"
-                  style="height: 36px; width: 106px"
-                ></span>`;
-
-        LOADING_DAILY.style = "height: 122px; width: 122px; padding: 0";
-
+      const getCityDataByName = async (NAME_CITY) => {
         const GET_CITY_URL = `https://geocoding-api.open-meteo.com/v1/search?name=${NAME_CITY}&count=1&language=en&format=json`;
+        const response = await fetch(GET_CITY_URL);
+        const json = await response.json();
+        const data = json.results[0];
+        getWeather(data.latitude, data.longitude);
+      };
 
-        const CURRENT_TIME_FORMATER = (COUNTRY_CODE, VALUE) => {
-          const OPTIONS = {
-            hour: "numeric",
-            minute: "numeric",
-            hour12: true,
-            weekday: "long",
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          };
+      const getWeatherData = async (latitude, longitude) => {
+        const GET_WEATHER_URL = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min&current=temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code`;
+        const response = await fetch(GET_WEATHER_URL);
+        const json = await response.json();
+        return json;
+      };
 
-          const NEW_TIME = new Date(VALUE);
-          return NEW_TIME.toLocaleDateString(`en-${COUNTRY_CODE}`, OPTIONS);
+      const CURRENT_TIME_FORMATER = (value) => {
+        const OPTIONS = {
+          hour: "numeric",
+          minute: "numeric",
+          hour12: true,
+          weekday: "long",
+          month: "short",
+          day: "numeric",
+          year: "numeric",
         };
 
-        const DAILY_TIME_FORMATER = (COUNTRY_CODE, VALUE) => {
-          const OPTION = {
-            weekday: "long",
-          };
+        const NEW_TIME = new Date(value);
+        return NEW_TIME.toLocaleDateString("en-US", OPTIONS);
+      };
 
-          const NEW_TIME = new Date(VALUE);
-          return NEW_TIME.toLocaleDateString(`en-${COUNTRY_CODE}`, OPTION);
+      const DAILY_TIME_FORMATER = (value) => {
+        const OPTION = {
+          weekday: "long",
         };
 
+        const NEW_TIME = new Date(value);
+        return NEW_TIME.toLocaleDateString("en-US", OPTION);
+      };
+
+      const changeDomContent = () => {};
+
+      async function getWeather(latitude, longitude) {
         try {
-          const RESPONSE_GEOCODING = await fetch(GET_CITY_URL);
-          const JSON_GEOCODING = await RESPONSE_GEOCODING.json();
-
-          if (!JSON_GEOCODING.results) {
-            // error city tidak di temukan
-            console.log(JSON_GEOCODING);
-            console.log("masuk ke sini error");
-          }
-
-          const DATA_CITY = JSON_GEOCODING.results[0];
-
-          const GET_WEATHER_URL = `https://api.open-meteo.com/v1/forecast?latitude=${DATA_CITY.latitude}&longitude=${DATA_CITY.longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min&current=temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code`;
-          const RESPONSE_WEATHER_FORECAST = await fetch(GET_WEATHER_URL);
-          const DATA_WEATHER = await RESPONSE_WEATHER_FORECAST.json();
-
-          // placeing data to DOM
-          // Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit molestiae at quia error. Animi ea maxime voluptate vitae, iusto quasi necessitatibus sint unde praesentium cum odio consequuntur qui veniam possimus.
-          if (RESPONSE_WEATHER_FORECAST.ok) {
-            CURRENT_ICON_WEATHER.className = "";
-            CURRENT_ICON_WEATHER.style = "width: 160px";
-
-            CURRENT_TIME.innerText = CURRENT_TIME_FORMATER(
-              DATA_CITY.country_code,
-              DATA_WEATHER.current.time
-            );
-
-            CURRENT_ICON_WEATHER.src =
-              icons_weather[DATA_WEATHER.current.weather_code].day.image;
-
-            CURRENT_TEMPERATURE_2M.innerHTML = `<h1 class="celcius">${Math.round(
-              DATA_WEATHER.current.temperature_2m
-            )}</h1>
-                <h1>&#8451;</h1>`;
-
-            CURRENT_DESCRIPTION_WEATHER.innerText =
-              icons_weather[DATA_WEATHER.current.weather_code].day.description;
-
-            CURRENT_RELATIVE_HUMIDITY_2M.innerText =
-              DATA_WEATHER.current.relative_humidity_2m +
-              DATA_WEATHER.current_units.relative_humidity_2m;
-
-            CURRENT_WIND_SPEED_10M.innerText =
-              DATA_WEATHER.current.wind_speed_10m +
-              DATA_WEATHER.current_units.wind_speed_10m;
-
-            ROW_CARD_DAILY.classList.remove(
-              "justify-content-center",
-              "align-items-center"
-            );
-            LOADING_DAILY.style = "display: none";
-            DATA_WEATHER.daily.time.forEach((_, index) => {
-              if (index < 6) {
-                CARD_DAILY[index].style = "display: block";
-                DAILY_DAY[index].innerText = DAILY_TIME_FORMATER(
-                  DATA_CITY.country_code,
-                  DATA_WEATHER.daily.time[index + 1]
-                );
-
-                DAILY_ICON_WEATHER[index].src =
-                  icons_weather[
-                    DATA_WEATHER.daily.weather_code[index + 1]
-                  ].day.image;
-
-                DAILY_TEMPERATURE_2M_MAX[index].innerHTML = `${Math.round(
-                  DATA_WEATHER.daily.temperature_2m_max[index + 1]
-                )}<p style="font-size: 13px">&#8451;</p>`;
-
-                DAILY_TEMPERATURE_2M_MIN[index].innerHTML = `${Math.round(
-                  DATA_WEATHER.daily.temperature_2m_max[index + 1]
-                )}<p style="font-size: 13px">&#8451;</p>`;
-              }
-            });
-          }
-
-          console.log(DATA_CITY);
-          console.log(DATA_WEATHER);
-          console.log(icons_weather);
+          const dataWeather = await getWeatherData(latitude, longitude);
+          console.log(dataWeather);
         } catch (error) {
           console.error(error);
-          console.log("Kota tidak di temukan");
         }
       }
+
+      // async function getWeather() {
+      //   event.preventDefault();
+      //   const NAME_CITY = SEARCH_CITY.value;
+
+      //   CURRENT_TIME.innerHTML = `<span class="placeholder" style="height: 30px;width: 70%"></span>`;
+
+      //   CURRENT_ICON_WEATHER.src = "...";
+      //   CURRENT_ICON_WEATHER.style = "width: 96px; height: 96px";
+      //   CURRENT_ICON_WEATHER.className = "placeholder";
+
+      //   CURRENT_DESCRIPTION_WEATHER.innerHTML = `<span class="placeholder" style="height: 36px; width: 96px;"></span>`;
+
+      //   CURRENT_TEMPERATURE_2M.innerHTML = `<span
+      //             class="placeholder"
+      //             style="height: 96px; width: 96px"
+      //           ></span>`;
+
+      //   CURRENT_RELATIVE_HUMIDITY_2M.innerHTML = `<span
+      //             class="placeholder"
+      //             style="height: 36px; width: 36px"
+      //           ></span>`;
+
+      //   ROW_CARD_DAILY.classList.add(
+      //     "justify-content-center",
+      //     "align-items-center"
+      //   );
+
+      //   for (let i = 0; i < 6; i++) {
+      //     CARD_DAILY[i].style = "display: none";
+      //   }
+
+      //   CURRENT_WIND_SPEED_10M.innerHTML = `<span
+      //             class="placeholder"
+      //             style="height: 36px; width: 106px"
+      //           ></span>`;
+
+      //   LOADING_DAILY.style = "height: 122px; width: 122px; padding: 0";
+
+      //   try {
+      //     const JSON_GEOCODING = await getCityData(NAME_CITY);
+      //     const DATA_CITY = JSON_GEOCODING.results[0];
+
+      //     // const RESPONSE_WEATHER_FORECAST = await getWeatherData(
+      //     //   DATA_CITY.latitude,
+      //     //   DATA_CITY.longitude
+      //     // );
+      //     const DATA_WEATHER = await getWeatherData(
+      //       DATA_CITY.latitude,
+      //       DATA_CITY.longitude
+      //     );
+
+      //     // placeing data to DOM
+      //     // Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit molestiae at quia error. Animi ea maxime voluptate vitae, iusto quasi necessitatibus sint unde praesentium cum odio consequuntur qui veniam possimus.
+      //     if (DATA_WEATHER) {
+      //       CURRENT_ICON_WEATHER.className = "";
+      //       CURRENT_ICON_WEATHER.style = "width: 160px";
+
+      //       CURRENT_TIME.innerText = CURRENT_TIME_FORMATER(
+      //         DATA_CITY.country_code,
+      //         DATA_WEATHER.current.time
+      //       );
+
+      //       CURRENT_ICON_WEATHER.src =
+      //         icons_weather[DATA_WEATHER.current.weather_code].day.image;
+
+      //       CURRENT_TEMPERATURE_2M.innerHTML = `<h1 class="celcius">${Math.round(
+      //         DATA_WEATHER.current.temperature_2m
+      //       )}</h1>
+      //           <h1>&#8451;</h1>`;
+
+      //       CURRENT_DESCRIPTION_WEATHER.innerText =
+      //         icons_weather[DATA_WEATHER.current.weather_code].day.description;
+
+      //       CURRENT_RELATIVE_HUMIDITY_2M.innerText =
+      //         DATA_WEATHER.current.relative_humidity_2m +
+      //         DATA_WEATHER.current_units.relative_humidity_2m;
+
+      //       CURRENT_WIND_SPEED_10M.innerText =
+      //         DATA_WEATHER.current.wind_speed_10m +
+      //         DATA_WEATHER.current_units.wind_speed_10m;
+
+      //       ROW_CARD_DAILY.classList.remove(
+      //         "justify-content-center",
+      //         "align-items-center"
+      //       );
+      //       LOADING_DAILY.style = "display: none";
+      //       DATA_WEATHER.daily.time.forEach((_, index) => {
+      //         if (index < 6) {
+      //           CARD_DAILY[index].style = "display: block";
+      //           DAILY_DAY[index].innerText = DAILY_TIME_FORMATER(
+      //             DATA_CITY.country_code,
+      //             DATA_WEATHER.daily.time[index + 1]
+      //           );
+
+      //           DAILY_ICON_WEATHER[index].src =
+      //             icons_weather[
+      //               DATA_WEATHER.daily.weather_code[index + 1]
+      //             ].day.image;
+
+      //           DAILY_TEMPERATURE_2M_MAX[index].innerHTML = `${Math.round(
+      //             DATA_WEATHER.daily.temperature_2m_max[index + 1]
+      //           )}<p style="font-size: 13px">&#8451;</p>`;
+
+      //           DAILY_TEMPERATURE_2M_MIN[index].innerHTML = `${Math.round(
+      //             DATA_WEATHER.daily.temperature_2m_max[index + 1]
+      //           )}<p style="font-size: 13px">&#8451;</p>`;
+      //         }
+      //       });
+      //     }
+
+      //     console.log(DATA_CITY);
+      //     console.log(DATA_WEATHER);
+      //     console.log(icons_weather);
+      //   } catch (error) {
+      //     console.error(error);
+      //     console.log("Kota tidak di temukan");
+      //   }
+      //   // navigator.geolocation.getCurrentPosition((position) => {
+      //   //   doSomething(position.coords.latitude, position.coords.longitude);
+      //   // });
+      // }
     </script>
   </body>
 </html>
