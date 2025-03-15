@@ -126,7 +126,7 @@
   <body>
     <main class="container d-flex flex-column">
       <div id="card" class="rounded-3">
-        <nav class="navbar navbar-expand mb-5">
+        <nav class="navbar navbar-expand gap-2 mb-5">
           <form
             id="form-search-city"
             class="d-flex gap-2 fs-6 text text-nowrap align-items-center"
@@ -134,11 +134,31 @@
             Search location
             <input
               type="text"
-              class="form-control border-dark-subtle"
+              class="form-control border-secondary"
               name="city"
               id="search_City"
             />
           </form>
+          <button
+            id="location-user"
+            type="button"
+            class="btn btn-outline-secondary"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              style="width: 24px"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-map-pin"
+            >
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </button>
         </nav>
 
         <div
@@ -419,6 +439,7 @@
     <!-- script code -->
     <script>
       const SEARCH_CITY = document.getElementById("search_City");
+      // const Location_user = document.getElementById("location-user");
 
       // Get DOM for current day
       const CURRENT_TIME = document.getElementById("current_time");
@@ -456,6 +477,17 @@
           getCityDataByName(SEARCH_CITY.value);
         });
 
+      document.querySelector("#location-user").addEventListener("click", () => {
+        event.preventDefault();
+        navigator.geolocation.getCurrentPosition((position) => {
+          getCityDataByLatLon(
+            position.coords.latitude,
+            position.coords.longitude
+          );
+          getWeather(position.coords.latitude, position.coords.longitude);
+        });
+      });
+
       document.addEventListener("DOMContentLoaded", () => {
         navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -476,7 +508,7 @@
         const GET_CITY_URL = `https://nominatim.openstreetmap.org/reverse.php?lat=${latitude}&lon=${longitude}&zoom=10&format=jsonv2`;
         const response = await fetch(GET_CITY_URL);
         const json = await response.json();
-        const city = json.address.region;
+        const city = json.address.city;
         SEARCH_CITY.value = city;
       };
 
